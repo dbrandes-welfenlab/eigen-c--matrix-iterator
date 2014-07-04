@@ -118,4 +118,11 @@ int main()
         i++;
     }
     assert(i == 3);
+    i = 0;
+    for (int j:indices(mat))
+    {
+        assert(i == j);
+        i++;
+    }
+    assert(i == 2);
 }

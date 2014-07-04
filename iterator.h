@@ -168,15 +168,15 @@ namespace lang
 {
 
 template<typename _Scalar, int _Rows, int _Cols>
-range_proxy<int> indices(const Eigen::Matrix<_Scalar,_Rows,_Cols>)
+range_proxy<long int> indices(const Eigen::Matrix<_Scalar,_Rows,_Cols>& mat)
 {
-    if (_Cols > 1)
+    if (mat.rows() > 1)
     {
-        return {0, _Rows};
+        return {0, mat.rows()};
     }
     else
     {
-        return {0, _Cols};
+        return {0, mat.cols()};
     }
 }
 
