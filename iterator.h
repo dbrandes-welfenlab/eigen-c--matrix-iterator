@@ -3,6 +3,8 @@
 
 #include <eigen3/Eigen/Dense>
 
+#include <cpp11-range/range.hpp>
+
 namespace Eigen
 {
     template<typename _Scalar, int _Rows, int _Cols>
@@ -158,6 +160,27 @@ namespace Eigen
     {
         return ConstIterator<_Scalar, _Rows, _Cols>(mat,mat.rows());
     }
+}
+
+namespace util
+{
+namespace lang
+{
+
+template<typename _Scalar, int _Rows, int _Cols>
+range_proxy<int> indices(const Eigen::Matrix<_Scalar,_Rows,_Cols>)
+{
+    if (_Cols > 1)
+    {
+        return {0, _Rows};
+    }
+    else
+    {
+        return {0, _Cols};
+    }
+}
+
+}
 }
 
 #endif // ITERATOR_H

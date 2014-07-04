@@ -4,6 +4,9 @@
 
 #include <eigen3/Eigen/Dense>
 
+using util::lang::range;
+using util::lang::indices;
+
 typedef Eigen::VectorXd VecDd;
 typedef Eigen::MatrixXd MatDd;
 
@@ -108,4 +111,11 @@ int main()
             i++;
         }
     }
+    i = 0;
+    for (int j:indices(mat2))
+    {
+        assert(i == j);
+        i++;
+    }
+    assert(i == 3);
 }
