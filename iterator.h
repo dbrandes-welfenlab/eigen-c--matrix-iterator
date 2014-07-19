@@ -109,7 +109,7 @@ namespace Eigen
     public:
         explicit ConstIterator(const Matrix<_Scalar, _Rows, _Cols>& data, int position): data(data), position(position) {}
 
-        const Eigen::Block<Eigen::Matrix<_Scalar, _Rows, _Cols>,1,_Cols, false > operator*()
+        const Eigen::Block<const Eigen::Matrix<_Scalar, _Rows, _Cols>,1,_Cols, false > operator*()
         {
             return data.row(position);
         }

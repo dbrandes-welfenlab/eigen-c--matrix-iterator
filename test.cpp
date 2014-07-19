@@ -28,18 +28,11 @@ typedef Eigen::Vector2i Vec2i;
 typedef Eigen::Vector3i Vec3i;
 //typedef Eigen::Vector4i Vec4i;
 
-int main()
+void vectorTests()
 {
-
     Vec2d t2(0.0,1.0);
+
     int i = 0;
-    MatDd test;
-    test.resize(2,2);
-    Eigen::DenseBase<Eigen::Matrix<double,-1,-1> >::RowXpr row = test.row(0);
-
-    Mat2d test2;
-    Eigen::DenseBase<Eigen::Matrix<double,2,2> >::RowXpr row2 = test2.row(0);
-
     for (double t:t2)
     {
         assert(int(t) == i);
@@ -52,6 +45,7 @@ int main()
         assert(int(t) == i);
         i++;
     }
+
     i = 0;
     for (const double& t:t2)
     {
@@ -59,10 +53,33 @@ int main()
         i++;
     }
 
+    std::cout << "non-const tests done" << std::endl;
+
+    const Vec2d& t3 = t2;
+
+    i = 0;
+    for (double t:t3)
+    {
+        assert(int(t) == i);
+        i++;
+    }
+
+    i = 0;
+    for (const double& t:t3)
+    {
+        assert(int(t) == i);
+        i++;
+    }
+    std::cout << "vector tests done!" << std::endl;
+}
+
+void matTests()
+{
     MatDi mat;
     mat.resize(2,2);
     mat << 0, 1, 2, 3;
-    i = 0;
+
+    int i = 0;
     for (const Vec2i& vec: mat)
     {
         for (const int& t: vec)
@@ -92,6 +109,32 @@ int main()
         }
     }
 
+    std::cout << "non-const tests done" << std::endl;
+
+    const MatDi& cmat = mat;
+
+    i = 0;
+    for (const Vec2i& vec: cmat)
+    {
+        for (const int& t: vec)
+        {
+            assert(t == i);
+            i++;
+        }
+    }
+
+    i = 0;
+    for (Vec2i vec: cmat)
+    {
+        for (int t: vec)
+        {
+            assert(t == i);
+            i++;
+        }
+    }
+
+    std::cout << "dynamic matrix tests done" << std::endl;
+
     Mat3d mat2;
     i = 0;
     for (auto vec: mat2)
@@ -102,6 +145,7 @@ int main()
             i++;
         }
     }
+
     i = 0;
     for (const Vec3d& vec: mat2)
     {
@@ -111,6 +155,43 @@ int main()
             i++;
         }
     }
+
+    i = 0;
+    for (Vec3d vec: mat2)
+    {
+        for (double val: vec)
+        {
+            assert(i == int(val));
+            i++;
+        }
+    }
+
+    std::cout << "non-const tests done" << std::endl;
+
+    const Mat3d& cmat2 = mat2;
+
+    i = 0;
+    for (const Vec3d& vec: cmat2)
+    {
+        for (double val: vec)
+        {
+            assert(i == int(val));
+            i++;
+        }
+    }
+
+    i = 0;
+    for (Vec3d vec: cmat2)
+    {
+        for (double val: vec)
+        {
+            assert(i == int(val));
+            i++;
+        }
+    }
+
+    std::cout << "static matrix tests done" << std::endl;
+
     i = 0;
     for (int j:indices(mat2))
     {
@@ -118,6 +199,15 @@ int main()
         i++;
     }
     assert(i == 3);
+
+    i = 0;
+    for (int j:indices(cmat2))
+    {
+        assert(i == j);
+        i++;
+    }
+    assert(i == 3);
+
     i = 0;
     for (int j:indices(mat))
     {
@@ -125,4 +215,19 @@ int main()
         i++;
     }
     assert(i == 2);
+
+    i = 0;
+    for (int j:indices(cmat))
+    {
+        assert(i == j);
+        i++;
+    }
+    assert(i == 2);
+
+}
+
+int main()
+{
+    vectorTests();
+    matTests();
 }
