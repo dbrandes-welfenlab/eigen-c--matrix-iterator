@@ -168,17 +168,82 @@ namespace lang
 {
 
 template<typename _Scalar, int _Rows, int _Cols>
-range_proxy<long int> indices(const Eigen::Matrix<_Scalar,_Rows,_Cols>& mat)
+int len(const Eigen::Matrix<_Scalar,_Rows,_Cols>& mat)
 {
-    if (mat.rows() > 1)
-    {
-        return {0, mat.rows()};
-    }
-    else
-    {
-        return {0, mat.cols()};
-    }
+    return mat.rows();
 }
+
+template<typename _Scalar, int _Cols>
+int len(const Eigen::Matrix<_Scalar, 1,_Cols>& mat)
+{
+    return mat.cols();
+}
+
+template<typename _Scalar, int _Rows, int _Cols, int _Rows2, int _Cols2>
+int len(const Eigen::Block<const Eigen::Matrix<_Scalar, _Rows, _Cols>, _Rows2, _Cols2, false>& mat)
+{
+    return mat.rows();
+}
+
+template<typename _Scalar, int _Rows, int _Cols, int _Cols2>
+int len(const Eigen::Block<const Eigen::Matrix<_Scalar, _Rows, _Cols>, 1, _Cols2, false>& mat)
+{
+    return mat.cols();
+}
+
+template<typename _Scalar, int _Rows, int _Cols, int _Rows2, int _Cols2>
+int len(const Eigen::Block<Eigen::Matrix<_Scalar, _Rows, _Cols>, _Rows2, _Cols2, false>& mat)
+{
+    return mat.rows();
+}
+
+template<typename _Scalar, int _Rows, int _Cols, int _Cols2>
+int len(const Eigen::Block<Eigen::Matrix<_Scalar, _Rows, _Cols>, 1, _Cols2, false>& mat)
+{
+    return mat.cols();
+}
+
+template<typename _Scalar, int _Rows, int _Cols>
+const Eigen::Block<const Eigen::Matrix<_Scalar, _Rows, _Cols>, 1, _Cols, false> elementAt(const Eigen::Matrix<_Scalar, _Rows, _Cols>& mat, int pos)
+{
+    return mat.row(pos);
+}
+
+template<typename _Scalar, int _Rows>
+const _Scalar& elementAt(const Eigen::Matrix<_Scalar, _Rows, 1>& mat, int pos)
+{
+    return mat[pos];
+}
+
+template<typename _Scalar, int _Rows, int _Cols>
+range_proxy<int> indices(const Eigen::Matrix<_Scalar,_Rows,_Cols>& mat)
+{
+    return {0, len(mat)};
+}
+
+
+#if 0
+template<typename _Scalar, int _Cols>
+//const Eigen::Block<const Eigen::Matrix<_Scalar, 1, _Cols>, 1, 1, false > elementAt(const Eigen::Matrix<_Scalar,1,_Cols>& mat, int pos)
+const _Scalar& elementAt(const Eigen::Matrix<_Scalar,1,_Cols>& mat, int pos)
+{
+    return mat[pos];
+}
+#endif
+
+#if 0
+template<typename Matrix, int _Rows, int _Cols>
+const Eigen::Block<const Eigen::Block<Matrix, _Rows, _Cols, false>, 1, _Cols, false> elementAt(const Eigen::Block<Matrix, _Rows, _Cols, false>& mat, int pos)
+{
+    return mat.row(pos);
+}
+
+template<typename Matrix, int _Cols>
+const Eigen::Block<const Eigen::Block<Matrix, 1, _Cols, false>, 1, 1, false> elementAt(const Eigen::Block<Matrix, 1, _Cols, false>& mat, int pos)
+{
+    return mat.col(pos);
+}
+#endif
 
 }
 }
