@@ -8,6 +8,7 @@ using util::lang::range;
 using util::lang::indices;
 using util::lang::len;
 using util::lang::elementAt;
+using util::lang::setElementAt;
 
 typedef Eigen::VectorXd VecDd;
 typedef Eigen::MatrixXd MatDd;
@@ -275,6 +276,20 @@ void otherTests()
     assert(testint == 1);
     testint = elementAt(vec2,1);
     assert(testint == 1);
+
+    setElementAt(testvec,0,10);
+    setElementAt(testvec,1,11);
+    assert(testvec[0] == 10);
+    assert(testvec[1] == 11);
+
+    setElementAt(mat1.row(0),0,20);
+    setElementAt(mat1.row(0),1,21);
+    setElementAt(mat1.row(1),0,30);
+    setElementAt(mat1.row(1),1,31);
+    assert(mat1(0,0) == 20);
+    assert(mat1(0,1) == 21);
+    assert(mat1(1,0) == 30);
+    assert(mat1(1,1) == 31);
 }
 
 int main()

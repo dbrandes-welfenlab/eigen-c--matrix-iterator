@@ -216,6 +216,18 @@ const _Scalar& elementAt(const Eigen::Matrix<_Scalar, _Rows, 1>& mat, int pos)
 }
 
 template<typename _Scalar, int _Rows, int _Cols>
+void setElementAt(Eigen::Block<Eigen::Matrix<_Scalar, _Rows, _Cols>, 1, _Cols, false> mat, int pos, const _Scalar& elem)
+{
+    mat[pos] = elem;
+}
+
+template<typename _Scalar, int _Rows>
+void setElementAt(Eigen::Matrix<_Scalar, _Rows, 1>& mat, int pos, const _Scalar& elem)
+{
+    mat[pos] = elem;
+}
+
+template<typename _Scalar, int _Rows, int _Cols>
 range_proxy<int> indices(const Eigen::Matrix<_Scalar,_Rows,_Cols>& mat)
 {
     return {0, len(mat)};
