@@ -236,7 +236,7 @@ range_proxy<int> indices(const Eigen::Matrix<_Scalar,_Rows,_Cols>& mat)
 template<typename _Scalar, int _Cols>
 void resizeOuter(Eigen::Matrix<_Scalar, -1, _Cols>& mat, int size)
 {
-    mat.resize(size,std::max(1,mat.cols()));
+    mat.resize(size,std::max(1,(int)mat.cols()));
 }
 
 #if 0
