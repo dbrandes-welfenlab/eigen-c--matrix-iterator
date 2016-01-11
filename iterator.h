@@ -3,7 +3,7 @@
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#include <eigen3/Eigen/Dense>
+#include <Eigen/Dense>
 #pragma GCC diagnostic pop
 
 #include "extern/cpp11-range/range.hpp"
