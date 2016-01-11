@@ -1,9 +1,12 @@
 #ifndef ITERATOR_H
 #define ITERATOR_H
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 #include <eigen3/Eigen/Dense>
+#pragma GCC diagnostic pop
 
-#include <cpp11-range/range.hpp>
+#include "extern/cpp11-range/range.hpp"
 
 namespace Eigen
 {
