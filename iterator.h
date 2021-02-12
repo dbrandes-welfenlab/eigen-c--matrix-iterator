@@ -6,7 +6,7 @@
 #include <Eigen/Dense>
 #pragma GCC diagnostic pop
 
-#include "extern/cpp11-range/range.hpp"
+#include "range.hpp"
 
 namespace Eigen
 {
