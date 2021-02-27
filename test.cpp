@@ -1,8 +1,8 @@
-#include "iterator.h"
+#include "eigen_cpp_matrix_iterator/iterator.h"
 
 #include <iostream>
 
-#include <eigen3/Eigen/Dense>
+#include <Eigen/Dense>
 
 using util::lang::range;
 using util::lang::indices;

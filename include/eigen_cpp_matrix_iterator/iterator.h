@@ -6,7 +6,7 @@
 #include <Eigen/Dense>
 #pragma GCC diagnostic pop
 
-#include "range.hpp"
+#include "cpp11_range/range.hpp"
 
 namespace Eigen
 {
@@ -162,6 +162,29 @@ namespace Eigen
     template<typename _Scalar, int _Rows, int _Cols> ConstIterator<_Scalar, _Rows, _Cols> end(const Eigen::Matrix<_Scalar, _Rows, _Cols>& mat)
     {
         return ConstIterator<_Scalar, _Rows, _Cols>(mat,mat.rows());
+    }
+}
+
+namespace std
+{
+    template<typename _Scalar, int _Rows, int _Cols> Eigen::IteratorRow<_Scalar, _Rows, _Cols> begin(Eigen::Block<Eigen::Matrix<_Scalar, _Rows, _Cols>,1,_Cols, false > mat)
+    {
+        return Eigen::IteratorRow<_Scalar, _Rows, _Cols>(mat,0);
+    }
+
+    template<typename _Scalar, int _Rows, int _Cols> Eigen::IteratorRow<_Scalar, _Rows, _Cols> end(Eigen::Block<Eigen::Matrix<_Scalar, _Rows, _Cols>,1,_Cols, false > mat)
+    {
+        return Eigen::IteratorRow<_Scalar, _Rows, _Cols>(mat,mat.cols());
+    }
+
+    template<typename _Scalar, int _Rows, int _Cols> Eigen::ConstIterator<_Scalar, _Rows, _Cols> begin(const Eigen::Matrix<_Scalar, _Rows, _Cols>& mat)
+    {
+        return Eigen::ConstIterator<_Scalar, _Rows, _Cols>(mat,0);
+    }
+
+    template<typename _Scalar, int _Rows, int _Cols> Eigen::ConstIterator<_Scalar, _Rows, _Cols> end(const Eigen::Matrix<_Scalar, _Rows, _Cols>& mat)
+    {
+        return Eigen::ConstIterator<_Scalar, _Rows, _Cols>(mat,mat.rows());
     }
 }
 

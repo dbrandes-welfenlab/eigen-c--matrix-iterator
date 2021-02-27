@@ -5,3 +5,4 @@ eigen-c++-matrix-iterator.files
 eigen-c++-matrix-iterator.includes
 *.user.3.2-pre1
 main
+extern
